@@ -1,0 +1,14 @@
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/stock-quote-alert
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/stock-quote-alert.deps.json
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/stock-quote-alert.runtimeconfig.json
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/stock-quote-alert.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/stock-quote-alert.pdb
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.GeneratedMSBuildEditorConfig.editorconfig
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.AssemblyInfoInputs.cache
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.AssemblyInfo.cs
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.csproj.CoreCompileInputs.cache
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.dll
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/refint/stock-quote-alert.dll
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.pdb
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.genruntimeconfig.cache
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/ref/stock-quote-alert.dll
