@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Serilog;
 
 /// Serviço responsável por consultar a cotação de um ativo usando a API da AlphaVantage.
 public class StockPriceService
@@ -61,6 +62,7 @@ public class StockPriceService
         catch (Exception ex)
         {
             // Falhas de rede, parsing, indisponibilidade da API, etc.
+            Log.Error($"Erro ao consultar API: {ex.Message}");
             Console.WriteLine($"Erro ao consultar API: {ex.Message}");
             return null;
         }

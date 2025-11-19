@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Mail;
+using Serilog;
 
 /// Serviço responsável por enviar e-mails usando SMTP.
 /// Usado para alertar quando o ativo ultrapassar limites configurados para compra/venda.
@@ -47,12 +48,14 @@ namespace StockQuoteAlert.Services
                 mailMessage.To.Add(_destinationEmail);
 
                 client.Send(mailMessage);
+                Log.Information($">>> Email enviado: {subject}");
                 Console.WriteLine($">>> Email enviado: {subject}");
             }
             catch (Exception ex)
             {
                 // Pode falhar por autenticação, host incorreto, porta bloqueada etc.
                 Console.WriteLine($"Erro ao enviar email: {ex.Message}");
+                Log.Error($"Erro ao enviar email: {ex.Message}");
             }
         }
     }

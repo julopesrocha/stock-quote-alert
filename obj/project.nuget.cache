@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4NDOdZJJrkE=",
+  "dgSpecHash": "huUqgiV6PSM=",
   "success": true,
   "projectFilePath": "/Users/juca/Documents/stock-quote-alert/stock-quote-alert.csproj",
   "expectedPackageFiles": [
@@ -8,10 +8,22 @@
     "/Users/juca/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.0/microsoft.extensions.configuration.abstractions.10.0.0.nupkg.sha512",
     "/Users/juca/.nuget/packages/microsoft.extensions.configuration.fileextensions/10.0.0/microsoft.extensions.configuration.fileextensions.10.0.0.nupkg.sha512",
     "/Users/juca/.nuget/packages/microsoft.extensions.configuration.json/10.0.0/microsoft.extensions.configuration.json.10.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.0/microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/microsoft.extensions.diagnostics.abstractions/9.0.0/microsoft.extensions.diagnostics.abstractions.9.0.0.nupkg.sha512",
     "/Users/juca/.nuget/packages/microsoft.extensions.fileproviders.abstractions/10.0.0/microsoft.extensions.fileproviders.abstractions.10.0.0.nupkg.sha512",
     "/Users/juca/.nuget/packages/microsoft.extensions.fileproviders.physical/10.0.0/microsoft.extensions.fileproviders.physical.10.0.0.nupkg.sha512",
     "/Users/juca/.nuget/packages/microsoft.extensions.filesystemglobbing/10.0.0/microsoft.extensions.filesystemglobbing.10.0.0.nupkg.sha512",
-    "/Users/juca/.nuget/packages/microsoft.extensions.primitives/10.0.0/microsoft.extensions.primitives.10.0.0.nupkg.sha512"
+    "/Users/juca/.nuget/packages/microsoft.extensions.hosting.abstractions/9.0.0/microsoft.extensions.hosting.abstractions.9.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/microsoft.extensions.logging/9.0.0/microsoft.extensions.logging.9.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.0/microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/microsoft.extensions.options/9.0.0/microsoft.extensions.options.9.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/microsoft.extensions.primitives/10.0.0/microsoft.extensions.primitives.10.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/serilog/4.3.0/serilog.4.3.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/serilog.extensions.hosting/9.0.0/serilog.extensions.hosting.9.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/serilog.extensions.logging/9.0.0/serilog.extensions.logging.9.0.0.nupkg.sha512",
+    "/Users/juca/.nuget/packages/serilog.sinks.console/6.1.1/serilog.sinks.console.6.1.1.nupkg.sha512",
+    "/Users/juca/.nuget/packages/serilog.sinks.file/7.0.0/serilog.sinks.file.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
