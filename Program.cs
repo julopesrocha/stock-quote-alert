@@ -3,6 +3,7 @@ using System.Globalization;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Threading.Tasks;
+using StockQuoteAlert.Services;
 
 class Program
 {
@@ -34,51 +35,78 @@ class Program
         }
 
 
-        // Carrega appsettings.json
+        // Carrega appjson
         var configuracao = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
-        string emailDestino = ConfigHelper.GetRequiredString(configuracao, "Email:Destino");
+        string destinationEmail = ConfigHelper.GetRequiredString(configuracao, "Email:Destino");
         string smtpHost = ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Host");
-        string smtpUsuario = ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Usuario");
-        string smtpSenha = ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Senha");
+        string smtpUser = ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Usuario");
+        string smtpPassword = ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Senha");
 
-        int smtpPorta = int.Parse(ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Porta"));
+        int smtpPort = int.Parse(ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Porta"));
         bool smtpUseSSL = bool.Parse(ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:UseSSL"));
-        int intervaloSegundos = int.Parse(ConfigHelper.GetRequiredString(configuracao, "Monitoramento:IntervaloSegundos"));
+        int secondsInterval = int.Parse(ConfigHelper.GetRequiredString(configuracao, "Monitoramento:secondsInterval"));
 
         var apiKey = configuracao["AlphaVantage:ApiKey"];
 
         if (string.IsNullOrWhiteSpace(apiKey))
         {
-            Console.WriteLine("ERRO: API Key da AlphaVantage não encontrada no appsettings.json");
+            Console.WriteLine("ERRO: API Key da AlphaVantage não encontrada no appjson");
             return;
         }
 
+        var emailService = new EmailService(
+            smtpHost,
+            smtpPort,
+            smtpUser,
+            smtpPassword,
+            destinationEmail
+        );
+
 
         Console.WriteLine("Configurações carregadas:");
-        Console.WriteLine($"Email destino: {emailDestino}");
+        Console.WriteLine($"Email destino: {destinationEmail}");
         Console.WriteLine($"SMTP host: {smtpHost}");
-        Console.WriteLine($"Intervalo: {intervaloSegundos}s");
+        Console.WriteLine($"Intervalo: {secondsInterval}s");
 
         var priceService = new StockPriceService(apiKey);
 
+        decimal? lastNotified = null;
+
         while (true)
         {
-            var precoAtual = await priceService.GetStockPriceAsync(ativo);
+            var price = await priceService.GetStockPriceAsync(ativo);
 
-            if (precoAtual != null)
+            if (price != null)
             {
-                Console.WriteLine($"Preço atual de {ativo}: {precoAtual}");
+                Console.WriteLine($"Preço atual de {ativo}: {price}");
+
+                if (price >= precoVenda && lastNotified != 1)
+                {
+                    emailService.SendEmail(
+                        $"ALTA! {ativo}",
+                        $"O preço atingiu {price}, acima do limite de venda {precoVenda}"
+                    );
+                    lastNotified = 1;
+                }
+                else if (price <= precoCompra && lastNotified != -1)
+                {
+                    emailService.SendEmail(
+                        $"BAIXA! {ativo}",
+                        $"O preço caiu para {price}, abaixo do limite de compra {precoCompra}"
+                    );
+                    lastNotified = -1;
+                }
             }
             else
             {
                 Console.WriteLine("Não foi possível obter a cotação.");
             }
 
-            await Task.Delay(intervaloSegundos * 1000);
+            await Task.Delay(TimeSpan.FromSeconds(secondsInterval));
         }
     }
 }
