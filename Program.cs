@@ -2,10 +2,11 @@
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Threading.Tasks;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         if (args.Length != 3)
         {
@@ -27,14 +28,18 @@ class Program
             Console.WriteLine("Erro: preço de compra inválido.");
             return;
         }
+        if (!ativo.EndsWith(".SA"))
+        {
+            ativo = ativo + ".SA";
+        }
 
-                // Carrega as configurações do appsettings.json
+
+        // Carrega appsettings.json
         var configuracao = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
 
-        // Lê os valores do arquivo
         string emailDestino = ConfigHelper.GetRequiredString(configuracao, "Email:Destino");
         string smtpHost = ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Host");
         string smtpUsuario = ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Usuario");
@@ -44,15 +49,37 @@ class Program
         bool smtpUseSSL = bool.Parse(ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:UseSSL"));
         int intervaloSegundos = int.Parse(ConfigHelper.GetRequiredString(configuracao, "Monitoramento:IntervaloSegundos"));
 
-        Console.WriteLine($"Ativo: {ativo}");
-        Console.WriteLine($"Preço limite para venda: {precoVenda}");
-        Console.WriteLine($"Preço limite para compra: {precoCompra}");
+        var apiKey = configuracao["AlphaVantage:ApiKey"];
+
+        if (string.IsNullOrWhiteSpace(apiKey))
+        {
+            Console.WriteLine("ERRO: API Key da AlphaVantage não encontrada no appsettings.json");
+            return;
+        }
+
 
         Console.WriteLine("Configurações carregadas:");
         Console.WriteLine($"Email destino: {emailDestino}");
         Console.WriteLine($"SMTP host: {smtpHost}");
         Console.WriteLine($"Intervalo: {intervaloSegundos}s");
 
+        var priceService = new StockPriceService(apiKey);
+
+        while (true)
+        {
+            var precoAtual = await priceService.GetStockPriceAsync(ativo);
+
+            if (precoAtual != null)
+            {
+                Console.WriteLine($"Preço atual de {ativo}: {precoAtual}");
+            }
+            else
+            {
+                Console.WriteLine("Não foi possível obter a cotação.");
+            }
+
+            await Task.Delay(intervaloSegundos * 1000);
+        }
     }
 }
 
