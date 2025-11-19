@@ -1,6 +1,9 @@
 using System.Net;
 using System.Net.Mail;
 
+/// Serviço responsável por enviar e-mails usando SMTP.
+/// Usado para alertar quando o ativo ultrapassar limites configurados para compra/venda.
+
 namespace StockQuoteAlert.Services
 {
     public class EmailService
@@ -11,6 +14,8 @@ namespace StockQuoteAlert.Services
         private readonly string _smtpPassword;
         private readonly string _destinationEmail;
 
+        /// Construtor recebe todas as configurações necessárias para autenticação e envio de e-mails.
+
         public EmailService(string smtpHost, int smtpPort, string smtpUser, string smtpPassword, string destinationEmail)
         {
             _smtpHost = smtpHost;
@@ -20,6 +25,7 @@ namespace StockQuoteAlert.Services
             _destinationEmail = destinationEmail;
         }
 
+        /// Envia um e-mail simples com título e corpo.
         public void SendEmail(string subject, string body)
         {
             try
@@ -29,7 +35,8 @@ namespace StockQuoteAlert.Services
                     EnableSsl = true,
                     Credentials = new NetworkCredential(_smtpUser, _smtpPassword)
                 };
-
+                
+                // Cria mensagem
                 var mailMessage = new MailMessage
                 {
                     From = new MailAddress(_smtpUser),
@@ -44,6 +51,7 @@ namespace StockQuoteAlert.Services
             }
             catch (Exception ex)
             {
+                // Pode falhar por autenticação, host incorreto, porta bloqueada etc.
                 Console.WriteLine($"Erro ao enviar email: {ex.Message}");
             }
         }
