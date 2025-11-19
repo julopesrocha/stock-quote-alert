@@ -12,3 +12,14 @@
 /Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.pdb
 /Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.genruntimeconfig.cache
 /Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/ref/stock-quote-alert.dll
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.sourcelink.json
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Configuration.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Configuration.FileExtensions.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Configuration.Json.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.FileProviders.Abstractions.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.FileProviders.Physical.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.FileSystemGlobbing.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Primitives.dll
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.csproj.AssemblyReference.cache
+/Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-qu.E01F1616.Up2Date
