@@ -1,0 +1,63 @@
+# ---- macOS ----
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# ---- .NET / C# ----
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# ASP.NET files
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Auto-generated files
+Generated\ Files/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Configuration transforms
+*.config
+*.json
+!appsettings.json   # <-- queremos manter esse
+
+# Backup files
+*.bak
+*.tmp
+
+# ---- VS Code ----
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# ---- Logs ----
+logs/
+*.log
+
+# ---- OS related ----
+Thumbs.db
+ehthumbs.db
+Desktop.ini
