@@ -18,6 +18,8 @@ class Program
 
         string ativo = args[0];
 
+        // Converte argumentos de preço usando cultura invariante
+
         if (!decimal.TryParse(args[1], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal precoVenda))
         {
             Console.WriteLine("Erro: preço de venda inválido.");
@@ -29,13 +31,16 @@ class Program
             Console.WriteLine("Erro: preço de compra inválido.");
             return;
         }
+
+        // A API da AlphaVantage exige ".SA" para ativos da B3
+
         if (!ativo.EndsWith(".SA"))
         {
             ativo = ativo + ".SA";
         }
 
+        // Carregamento de configuração (appsettings.json)
 
-        // Carrega appjson
         var configuracao = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -49,8 +54,8 @@ class Program
         int smtpPort = int.Parse(ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:Porta"));
         bool smtpUseSSL = bool.Parse(ConfigHelper.GetRequiredString(configuracao, "Email:SMTP:UseSSL"));
         int secondsInterval = int.Parse(ConfigHelper.GetRequiredString(configuracao, "Monitoramento:secondsInterval"));
-
-        var apiKey = configuracao["AlphaVantage:ApiKey"];
+        
+        var apiKey = configuracao["AlphaVantage:ApiKey"]; // API Key para a AlphaVantage
 
         if (string.IsNullOrWhiteSpace(apiKey))
         {
@@ -58,6 +63,7 @@ class Program
             return;
         }
 
+        // Inicialização dos serviços
         var emailService = new EmailService(
             smtpHost,
             smtpPort,
@@ -74,8 +80,9 @@ class Program
 
         var priceService = new StockPriceService(apiKey);
 
-        decimal? lastNotified = null;
+        decimal? lastNotified = null; // evita envio repetido de alertas idênticos
 
+        // Loop de monitoramento contínuo
         while (true)
         {
             var price = await priceService.GetStockPriceAsync(ativo);
@@ -83,7 +90,8 @@ class Program
             if (price != null)
             {
                 Console.WriteLine($"Preço atual de {ativo}: {price}");
-
+                
+                // Se preço >= limite de venda
                 if (price >= precoVenda && lastNotified != 1)
                 {
                     emailService.SendEmail(
@@ -92,6 +100,7 @@ class Program
                     );
                     lastNotified = 1;
                 }
+                // Se preço <= limite de compra
                 else if (price <= precoCompra && lastNotified != -1)
                 {
                     emailService.SendEmail(
@@ -105,12 +114,13 @@ class Program
             {
                 Console.WriteLine("Não foi possível obter a cotação.");
             }
-
+            // Aguarda o intervalo configurado antes da próxima consulta
             await Task.Delay(TimeSpan.FromSeconds(secondsInterval));
         }
     }
 }
 
+// Helper para simplificar leitura obrigatória de strings
 static class ConfigHelper
 {
     public static string GetRequiredString(IConfiguration config, string key)
