@@ -76,7 +76,7 @@ dotnet build
 
 Formato:
 
-dotnet run <ATIVO> <PRECO_VENDA> <PRECO_COMPRA>
+dotnet run < ATIVO> <PRECO_VENDA> <PRECO_COMPRA>
 
 
 Exemplo real:
