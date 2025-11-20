@@ -4,15 +4,24 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 using StockQuoteAlert.Services;
+using Serilog;
 
 class Program
 {
     static async Task Main(string[] args)
     {
+        Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Information()
+        .WriteTo.Console()
+        .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+        .CreateLogger();
+
+        Log.Information("Iniciando aplicação...");
+
+
         if (args.Length != 3)
         {
-            Console.WriteLine("Uso correto:");
-            Console.WriteLine("dotnet run <ATIVO> <PRECO_VENDA> <PRECO_COMPRA>");
+            Log.Information("Uso correto: dotnet run <ATIVO> <PRECO_VENDA> <PRECO_COMPRA>");
             return;
         }
 
@@ -22,13 +31,13 @@ class Program
 
         if (!decimal.TryParse(args[1], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal precoVenda))
         {
-            Console.WriteLine("Erro: preço de venda inválido.");
+            Log.Error("Erro: preço de venda inválido.");
             return;
         }
 
         if (!decimal.TryParse(args[2], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal precoCompra))
         {
-            Console.WriteLine("Erro: preço de compra inválido.");
+            Log.Error("Erro: preço de compra inválido.");
             return;
         }
 
@@ -59,7 +68,7 @@ class Program
 
         if (string.IsNullOrWhiteSpace(apiKey))
         {
-            Console.WriteLine("ERRO: API Key da AlphaVantage não encontrada no appjson");
+            Log.Error("Erro: API Key da AlphaVantage não encontrada no appjson");
             return;
         }
 
@@ -73,9 +82,15 @@ class Program
         );
 
 
-        Console.WriteLine("Configurações carregadas:");
+        Log.Information("Configurações carregadas:");
+
+        Log.Information($"Email destino: {destinationEmail}");
         Console.WriteLine($"Email destino: {destinationEmail}");
+
+        Log.Information($"SMTP host: {smtpHost}");
         Console.WriteLine($"SMTP host: {smtpHost}");
+
+        Log.Information($"Intervalo: {secondsInterval}s");
         Console.WriteLine($"Intervalo: {secondsInterval}s");
 
         var priceService = new StockPriceService(apiKey);
@@ -90,7 +105,8 @@ class Program
             if (price != null)
             {
                 Console.WriteLine($"Preço atual de {ativo}: {price}");
-                
+                Log.Warning("Preço atual de {Ativo}: {Preco}", ativo, price);
+
                 // Se preço >= limite de venda
                 if (price >= precoVenda && lastNotified != 1)
                 {
@@ -112,6 +128,7 @@ class Program
             }
             else
             {
+                Log.Warning("Não foi possível obter a cotação.");
                 Console.WriteLine("Não foi possível obter a cotação.");
             }
             // Aguarda o intervalo configurado antes da próxima consulta

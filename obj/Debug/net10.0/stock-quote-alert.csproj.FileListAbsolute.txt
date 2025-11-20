@@ -23,3 +23,15 @@
 /Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Primitives.dll
 /Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-quote-alert.csproj.AssemblyReference.cache
 /Users/juca/Documents/stock-quote-alert/obj/Debug/net10.0/stock-qu.E01F1616.Up2Date
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Hosting.Abstractions.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Logging.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Microsoft.Extensions.Options.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Serilog.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Serilog.Extensions.Hosting.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Serilog.Extensions.Logging.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Serilog.Sinks.Console.dll
+/Users/juca/Documents/stock-quote-alert/bin/Debug/net10.0/Serilog.Sinks.File.dll
