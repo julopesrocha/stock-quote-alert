@@ -2,7 +2,7 @@
 
 Monitor de cotações para ativos da B3 que envia alertas por e-mail quando o preço ultrapassa limites definidos para compra e venda.
 
-Aplicação desenvolvida em C# (.NET 8), com arquitetura organizada em serviços e configuração externa.
+Aplicação desenvolvida em C# (.NET 10), com arquitetura organizada em serviços e configuração externa.
 
 ## 🚀 Objetivo
 
