@@ -7,7 +7,7 @@ namespace StockAlert.Tests
         [Fact]
         public void Environment_Is_Working()
         {
-            Assert.True(true);
+            Assert.True(1 == 1);
         }
     }
 }
